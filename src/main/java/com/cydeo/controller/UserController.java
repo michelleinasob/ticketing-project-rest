@@ -1,5 +1,6 @@
 package com.cydeo.controller;
 
+import com.cydeo.annotation.ExecutionTime;
 import com.cydeo.dto.ResponseWrapper;
 import com.cydeo.dto.UserDTO;
 import com.cydeo.exception.TicketingProjectException;
@@ -24,12 +25,13 @@ public class UserController {
         this.userService = userService;
     }
 
+    @ExecutionTime
     @GetMapping
     @RolesAllowed({"Manager", "Admin"})
     @Operation(summary = "Get Users")
     public ResponseEntity<ResponseWrapper> getUsers(){
         List<UserDTO>userDTOList = userService.listAllUsers();
-        return ResponseEntity.ok(new ResponseWrapper("Users are successfully retrieved", userDTOList, HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Users successfully retrieved", userDTOList, HttpStatus.OK));
     }
 
     @GetMapping("/{username}")
@@ -37,7 +39,7 @@ public class UserController {
     @Operation(summary = "Get user by username")
     public ResponseEntity<ResponseWrapper> getUserByUserName(@PathVariable("username") String userName){
         UserDTO user = userService.findByUserName(userName);
-        return ResponseEntity.ok(new ResponseWrapper("User is successfully retrieved", user, HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("User successfully retrieved", user, HttpStatus.OK));
     }
 
     @PostMapping
@@ -45,7 +47,7 @@ public class UserController {
     @Operation(summary = "Create user")
     public ResponseEntity<ResponseWrapper> createUser(@RequestBody UserDTO user){
         userService.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper("User is successfully created", HttpStatus.CREATED));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper("User successfully created", HttpStatus.CREATED));
     }
 
     @PutMapping
@@ -53,7 +55,7 @@ public class UserController {
     @Operation(summary = "Update user")
     public ResponseEntity<ResponseWrapper> updateUser(@RequestBody UserDTO user){
         userService.update(user);
-        return ResponseEntity.ok(new ResponseWrapper("User is successfully updated", HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("User successfully updated", HttpStatus.OK));
     }
 
     @DeleteMapping("/{username}")
@@ -61,7 +63,7 @@ public class UserController {
     @Operation(summary = "Delete user")
     public ResponseEntity<ResponseWrapper> deleteUser(@PathVariable("username") String userName) throws TicketingProjectException {
         userService.delete(userName);
-        return ResponseEntity.ok(new ResponseWrapper("User is successfully deleted", HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("User successfully deleted", HttpStatus.OK));
     }
 
 }
