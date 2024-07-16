@@ -26,8 +26,7 @@ public class LoggingAspect {
     public void beforeAnyProjectAndTaskControllerAdvice(JoinPoint joinPoint){
         log.info("Before -> Method: {}, User: {}"
                 , joinPoint.getSignature().toShortString()
-                ,getUsername()
-        );
+                ,getUsername());
     }
 
     @AfterReturning(pointcut = "anyProjectAndTaskControllerPC()", returning = "results")
@@ -35,8 +34,7 @@ public class LoggingAspect {
         log.info("After Returning -> Method: {}, User: {}, Results: {}"
                 , joinPoint.getSignature().toShortString()
                 , getUsername()
-                , results.toString()
-        );
+                , results.toString());
 
     }
 
@@ -45,11 +43,8 @@ public class LoggingAspect {
         log.info("After Returning -> Method: {}, User: {}, Results: {}"
                 , joinPoint.getSignature().toShortString()
                 , getUsername()
-                , exception.getMessage()
-        );
+                , exception.getMessage());
 
     }
-
-
 
 }
