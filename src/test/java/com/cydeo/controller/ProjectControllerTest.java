@@ -3,7 +3,7 @@ package com.cydeo.controller;
 
 import com.cydeo.dto.ProjectDTO;
 import com.cydeo.dto.RoleDTO;
-//import com.cydeo.dto.TestResponseDTO;
+import com.cydeo.dto.TestResponseDTO;
 import com.cydeo.dto.UserDTO;
 import com.cydeo.enums.Gender;
 import com.cydeo.enums.Status;
@@ -45,7 +45,8 @@ class ProjectControllerTest {
 
         token = "Bearer " + getToken();
 
-        manager = new UserDTO(2L,
+        manager = new UserDTO(
+                2L,
                 "",
                 "",
                 "ozzy",
@@ -146,14 +147,13 @@ class ProjectControllerTest {
 
         map.add("grant_type", "password");
         map.add("client_id", "ticketing-app");
-        map.add("client_secret", "P2tMpbaXrvkdeit4b53umI0lY1p5TtAL");
+        map.add("client_secret", ""); // GET CODE FROM POSTMAN
         map.add("username", "ozzy");
         map.add("password", "abc1");
         map.add("scope", "openid");
 
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
 
-        /*
         ResponseEntity<TestResponseDTO> response =
                 restTemplate.exchange("http://localhost:8080/auth/realms/cydeo-dev/protocol/openid-connect/token",
                         HttpMethod.POST,
@@ -164,14 +164,8 @@ class ProjectControllerTest {
             return response.getBody().getAccess_token();
         }
 
-         */
-
         return "";
 
-
-
     }
-
-
 
 }
